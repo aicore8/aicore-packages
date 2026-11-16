@@ -2,7 +2,10 @@ import { zoneBounds, type ZoneShape } from "../shared/zone";
 
 export interface ZoneOptions {
   shape: ZoneShape;
-  /** How often the script check runs, in ms (default 500, at least 50). A colshape is tested every 50 ms. */
+  /**
+   * How often the script check runs, in ms (default 500, at least 50). A colshape zone is tested every 50 ms by
+   * FiveM, and this stays the shortest gap between two of its enter / exit calls.
+   */
   interval?: number;
   onEnter?: () => void;
   onExit?: () => void;
@@ -18,6 +21,10 @@ export class Zone {
   filed = false;
   colshape: number | null = null;
   unsubscribe: (() => void) | null = null;
+  /** Pending position check of a colshape zone (`zoneColshapes.ts`). */
+  recheck: ReturnType<typeof setTimeout> | null = null;
+  /** Game time of the last enter / exit call. */
+  lastFire = 0;
 
   constructor(
     readonly options: ZoneOptions,

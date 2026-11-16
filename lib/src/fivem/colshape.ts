@@ -3,7 +3,8 @@ import type { ZoneShape } from "../shared/zone";
 
 /**
  * FiveM colshapes on both sides: shapes kept by FiveM itself (one BVH for every resource, entities sampled at 20 Hz,
- * the test on a worker thread) that raise `onColshapeEnter` / `onColshapeExit(entity, id)`. Documented for Enhanced,
+ * the test on a worker thread) that raise `onColshapeEnter` / `onColshapeExit(entity, id)` in every resource listening
+ * for them. Documented for Enhanced,
  * backported to Legacy and RedM (citizenfx/fivem "feat(natives): backport colshape natives to legacy + rdr3",
  * 2026-07-23). A resource's shapes are deleted when it stops.
  */
@@ -75,6 +76,13 @@ export function createColshape(shape: ZoneShape): number | null {
     return id;
   } catch (error) {
     log.error("colshape could not be created", error);
+    // A shape made before the throw would react to every entity type.
+    if (typeof id === "number" && id >= 0)
+      try {
+        DeleteColshape(id);
+      } catch {
+        // gone already
+      }
     return null;
   }
 }
@@ -99,8 +107,9 @@ function dispatch(entity: number, id: number, inside: boolean): void {
 }
 
 /**
- * Enter (`inside` true) and exit of one colshape, through one listener per resource. Every resource receives every
- * colshape event, so only one place per side should listen for many shapes. Returns the unsubscribe.
+ * Enter (`inside` true) and exit of one colshape, through one listener per resource. Every resource that listens
+ * receives every colshape event of every resource (and, on the client, every player's ped crossing them), so only one
+ * place per side should listen for many shapes. Returns the unsubscribe.
  */
 export function onColshape(id: number, handler: ColshapeHandler): () => void {
   if (!listening) {
