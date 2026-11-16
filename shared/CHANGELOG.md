@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.7.0...shared-v0.8.0) (2026-11-16)
+
+
+### New Features
+
+* **lib:** Enhanced server helpers (colshapes, vehicle damage read/restore, server repair), vehicleCondition, spawnVehicle damage ([4d91cbe](https://github.com/aifivem/aicore-packages/commit/4d91cbeedd9f53d9c1bb07746a5b21f5e343b598))
+
 ## [0.7.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.6.0...shared-v0.7.0) (2026-11-02)
 
 

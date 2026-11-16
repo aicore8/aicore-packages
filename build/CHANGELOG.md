@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.2](https://github.com/aifivem/aicore-packages/compare/build-v0.2.1...build-v0.2.2) (2026-11-16)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @aifivem/shared bumped from ^0.7.0 to ^0.8.0
+
 ## [0.2.1](https://github.com/aifivem/aicore-packages/compare/build-v0.2.0...build-v0.2.1) (2026-11-02)
 
 
