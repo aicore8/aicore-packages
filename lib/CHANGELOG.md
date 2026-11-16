@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.9.0](https://github.com/aifivem/aicore-packages/compare/lib-v0.8.0...lib-v0.9.0) (2026-11-16)
+
+
+### New Features
+
+* **lib:** Enhanced server helpers (colshapes, vehicle damage read/restore, server repair), vehicleCondition, spawnVehicle damage ([4d91cbe](https://github.com/aifivem/aicore-packages/commit/4d91cbeedd9f53d9c1bb07746a5b21f5e343b598))
+* **lib:** FiveM colshapes on both sides (createColshape, onColshape); ai-lib's zone engine uses them after a live test ([f734c02](https://github.com/aifivem/aicore-packages/commit/f734c02fd836f1ead117ad138ca39a16df92268b))
+
+
+### Bug Fixes
+
+* **lib:** colshape zones re-checked after hand-over, ped change and id reuse; interval limits how often a zone fires ([7423f2b](https://github.com/aifivem/aicore-packages/commit/7423f2bbd3c2020ced1cc61e7d25e19ac04ec449))
+* **lib:** Enhanced BOOL results read as truthy, throw-based probe, damage read waits for the owner's first sync, every wheel index ([6b341ae](https://github.com/aifivem/aicore-packages/commit/6b341ae7f3899019bbb79d19f348dee0c040a9d5))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @aifivem/shared bumped from ^0.7.0 to ^0.8.0
+
 ## [0.8.0](https://github.com/aifivem/aicore-packages/compare/lib-v0.7.0...lib-v0.8.0) (2026-11-02)
 
 
