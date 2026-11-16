@@ -25,6 +25,8 @@ export interface OwnedVehicle {
   fuel: number;
   engine: number;
   body: number;
+  /** VehicleDamage (`@aifivem/lib/shared`: windows, tyres, lights, bumpers, tank) read by the server on Enhanced; null when none is stored. */
+  damage?: unknown;
 }
 
 /** Entity state bags ai-vehicles sets on a spawned owned vehicle. */
@@ -103,6 +105,8 @@ export type AiVehiclesServerExports = {
       fuel?: number;
       engine?: number;
       body?: number;
+      /** VehicleDamage (lib server `enhanced.readVehicleDamage`); null clears it, left out keeps the stored one. */
+      damage?: unknown;
       state?: VehicleState;
       garage?: string | null;
     },

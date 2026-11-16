@@ -1,7 +1,6 @@
 import type { DataSpec, WidgetSpec } from "@aifivem/shared";
 
-const isRecord = (v: unknown): v is Record<string, unknown> =>
-  typeof v === "object" && v !== null && !Array.isArray(v);
+import { isRecord } from "./record";
 
 /** An NPC standing at a place (a shopkeeper, a clerk): its model, an optional idle scenario and where it stands. */
 export interface PlacePed {

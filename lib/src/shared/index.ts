@@ -1,5 +1,7 @@
 /** Helpers usable on client and server. No FiveM natives here. */
 
+import { isRecord } from "./record";
+
 export { sleep, waitFor } from "./wait";
 export { bool, int, num, record, str, vec4, type Vec4 } from "./read";
 export {
@@ -12,13 +14,7 @@ export {
   readVec4,
 } from "./strict";
 export { fail, isActionOk, replyError, type ActionResult } from "./action";
-export {
-  distance,
-  flatDistance,
-  headingTo,
-  nearestOf,
-  type Vec3,
-} from "./vec";
+export { distance, flatDistance, headingTo, nearestOf, type Vec3 } from "./vec";
 export { pickRandom, randomInt, rollChance } from "./random";
 export { ServerClock } from "./clock";
 export {
@@ -36,11 +32,7 @@ export {
   readAccess,
   type AccessRule,
 } from "./access";
-export {
-  BLIP_STYLE_FIELDS,
-  readBlipStyle,
-  type BlipStyle,
-} from "./blipStyle";
+export { BLIP_STYLE_FIELDS, readBlipStyle, type BlipStyle } from "./blipStyle";
 export {
   polyFromCorners,
   readZoneShape,
@@ -63,10 +55,14 @@ export {
   type VehicleProps,
   type VehicleSetup,
 } from "./vehicleProps";
+export {
+  readBumperState,
+  toVehicleDamage,
+  VEHICLE_DAMAGE_MAX,
+  type VehicleDamage,
+} from "./vehicleDamage";
 
-export function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
+export { isRecord };
 
 /** Client text made safe for the server console: one line, no control characters, no `^n` colour codes. */
 export function logSafe(text: string, max: number): string {

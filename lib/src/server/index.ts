@@ -165,3 +165,5 @@ export { characters } from "./characters";
 export { illegal } from "./illegal";
 export { bans } from "./bans";
 export { isPrimeTime } from "./primeTime";
+export { enhanced } from "./enhanced/enhanced";
+export { vehicleCondition, type VehicleCondition } from "./vehicle/condition";

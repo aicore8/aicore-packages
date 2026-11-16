@@ -1,3 +1,4 @@
+import { isRecord } from "./record";
 /**
  * A vehicle's look and tuning as plain data (colours, mods, extras, livery, wheels, neon, tint, plate), read from and
  * written to an entity. Stored JSON carries `v: 1`.
@@ -26,8 +27,6 @@ export interface VehicleProps {
   bodyHealth: number;
 }
 
-const isObj = (v: unknown): v is Record<string, unknown> =>
-  typeof v === "object" && v !== null && !Array.isArray(v);
 const nums = (v: unknown, n: number): number[] | null =>
   Array.isArray(v) && v.length === n && v.every((x) => typeof x === "number")
     ? v
@@ -36,7 +35,7 @@ const nums = (v: unknown, n: number): number[] | null =>
 /** Stored or received props, checked; null when the shape is not ours. */
 export function toVehicleProps(v: unknown): VehicleProps | null {
   if (
-    !isObj(v) ||
+    !isRecord(v) ||
     v.v !== 1 ||
     typeof v.model !== "number" ||
     typeof v.plate !== "string"
@@ -51,8 +50,8 @@ export function toVehicleProps(v: unknown): VehicleProps | null {
     !extraColors ||
     !neonColor ||
     !tyreSmoke ||
-    !isObj(v.mods) ||
-    !isObj(v.extras) ||
+    !isRecord(v.mods) ||
+    !isRecord(v.extras) ||
     !Array.isArray(v.neon)
   )
     return null;
@@ -124,7 +123,7 @@ const colorsOf = (v: unknown): [number, number] | undefined => {
 
 /** A received setup, checked field by field (wrong fields drop); null when it is not an object. */
 export function toVehicleSetup(v: unknown): VehicleSetup | null {
-  if (!isObj(v)) return null;
+  if (!isRecord(v)) return null;
   return {
     maxed: v.maxed === true || undefined,
     colors: colorsOf(v.colors),

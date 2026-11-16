@@ -1,5 +1,11 @@
 import { VEHICLE_BAGS, type KeyPurpose } from "@aifivem/shared";
-import { waitFor, type VehicleProps, type VehicleSetup } from "../../shared";
+import {
+  waitFor,
+  type VehicleDamage,
+  type VehicleProps,
+  type VehicleSetup,
+} from "../../shared";
+import { restoreVehicleDamage } from "../enhanced/vehicle";
 import { fuel } from "../fuel";
 import { vehicleKeys } from "../vehicleKeys";
 import { randomPlate } from "./plate";
@@ -28,6 +34,8 @@ export interface SpawnVehicleOptions {
   props?: VehicleProps;
   /** Fresh-vehicle extras: full tuning, colours, livery, tint, dirt, engine running. */
   setup?: VehicleSetup;
+  /** Stored damage (windows, tyres, lights...), restored once a client owns the vehicle; FiveM for GTAV Enhanced only. */
+  damage?: VehicleDamage;
   /** Doors locked for everyone (keys unlock them). */
   locked?: boolean;
   /** Routing bucket the vehicle lives in (players put in it should be in the same one). */
@@ -60,7 +68,7 @@ async function seatPlayer(
 
 /**
  * Creates a networked vehicle on the server (strict entity lockdown) and sets it up in one step: plate, fuel, state
- * bags, look (props / setup), lock, bucket, keys for its purpose, a driver and passengers. Resolves the entity, or null when the model does not exist or creation failed.
+ * bags, look (props / setup), damage (Enhanced), lock, bucket, keys for its purpose, a driver and passengers. Resolves the entity, or null when the model does not exist or creation failed.
  */
 export async function spawnVehicle(
   options: SpawnVehicleOptions,
@@ -100,6 +108,16 @@ export async function spawnVehicle(
   if (options.setup) state.set(VEHICLE_BAGS.setup, options.setup, true);
   for (const [key, value] of Object.entries(options.bags ?? {}))
     state.set(key, value, true);
+  // Not awaited: it waits for the first owner client (nothing happens on Legacy).
+  if (options.damage) {
+    const model = GetEntityModel(vehicle);
+    // A handle freed and reused within the wait must not get this damage.
+    void restoreVehicleDamage(
+      vehicle,
+      options.damage,
+      () => GetEntityModel(vehicle) === model,
+    );
+  }
   if (options.keysTo !== undefined) {
     const synced = await waitFor(
       () =>
