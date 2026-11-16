@@ -166,4 +166,10 @@ export { illegal } from "./illegal";
 export { bans } from "./bans";
 export { isPrimeTime } from "./primeTime";
 export { enhanced } from "./enhanced/enhanced";
+export {
+  createColshape,
+  deleteColshape,
+  hasColshapes,
+  onColshape,
+} from "../fivem/colshape";
 export { vehicleCondition, type VehicleCondition } from "./vehicle/condition";

@@ -95,6 +95,12 @@ export {
   resourceExport,
 } from "../fivem/exports";
 export { createLocale, loadLocaleTexts, LOCALE_CONVAR } from "../fivem/locale";
+export {
+  createColshape,
+  deleteColshape,
+  hasColshapes,
+  onColshape,
+} from "../fivem/colshape";
 export { EntityState } from "../fivem/state/entityState";
 export { GlobalGroup, GlobalKey } from "../fivem/state/globalState";
 export { PlayerState } from "../fivem/state/playerState";

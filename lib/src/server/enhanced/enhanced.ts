@@ -1,4 +1,3 @@
-import { deleteColshape, hasColshapes, polygonColshape } from "./colshape";
 import {
   applyVehicleDamage,
   readVehicleDamage,
@@ -10,12 +9,10 @@ import {
 /**
  * Server features only FiveM for GTAV Enhanced has (patch notes and native docs, `aicore-fivem` skill
  * `references/enhanced.md`). Each feature is probed; without it every helper answers null / false and the caller
- * keeps its own path. Colshapes are documented for Enhanced but Legacy artifacts ship them too: their probe decides. Scripts never call these natives by hash themselves.
+ * keeps its own path. Scripts never call these natives by hash themselves. (Colshapes are on Legacy too:
+ * `createColshape` in the fivem layer.)
  */
 export const enhanced = {
-  hasColshapes,
-  polygonColshape,
-  deleteColshape,
   readVehicleDamage,
   applyVehicleDamage,
   restoreVehicleDamage,

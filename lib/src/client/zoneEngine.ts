@@ -1,60 +1,49 @@
+import { createColshape, deleteColshape, onColshape } from "../fivem/colshape";
 import { every, type Job } from "../fivem/scheduler/every";
 import { createLogger } from "../shared";
-import { zoneBounds, zoneContains, type ZoneShape } from "../shared/zone";
-import { cache } from "./cache";
+import { zoneContains } from "../shared/zone";
+import { cache, onCache } from "./cache";
+import { colshapesWork } from "./colshapeCheck";
+import { Zone, ZoneGrid, type ZoneOptions } from "./zoneGrid";
+
+export type { ZoneOptions };
 
 /**
- * The zone checker: inside / outside checks at each zone's own interval, never per frame. Built for any count
- * (measured with 1,000,000 zones): zones sit in a grid of 64 m cells and a check looks only at the player's cell and
- * the zones the player is in. ai-lib runs one for every resource's zones (`zones.ts`); a resource runs its own only
- * while ai-lib does not.
+ * The zone checker. With `colshapes` (ai-lib's checker only) each zone becomes a FiveM colshape once a live test
+ * passed: FiveM tests every shape at 20 Hz on a worker thread and only the enter / exit reaches JS. Otherwise, and for
+ * a zone FiveM refuses, the script check: each zone at its own interval, never per frame, in a grid of 64 m cells
+ * (measured with 1,000,000 zones). ai-lib runs one for every resource's zones (`zones.ts`); a resource runs its own
+ * only while ai-lib does not.
  */
 
 const log = createLogger(GetCurrentResourceName());
 
-export interface ZoneOptions {
-  shape: ZoneShape;
-  /** How often to check, in ms (default 500, at least 50). A shop needs ~500, a fast trigger ~100; per-frame work belongs elsewhere. */
-  interval?: number;
-  onEnter?: () => void;
-  onExit?: () => void;
+export interface ZoneEngineOptions {
+  /** Zones as FiveM colshapes after a live test. Every resource gets every colshape event: one engine per client. */
+  colshapes?: boolean;
 }
 
-const CELL = 64;
-/** A zone wider than this many cells is kept in one list checked every time instead of in the grid. */
-const MAX_CELLS = 64;
-const cellKey = (cx: number, cy: number): number =>
-  ((cx + 32768) << 16) | (cy + 32768);
-
-class Zone {
-  inside = false;
-  nextCheck = 0;
-  readonly interval: number;
-  /** Grid cells the zone is filed under; empty when it is in the large list. */
-  readonly cells: number[] = [];
-
-  constructor(
-    readonly options: ZoneOptions,
-    inside: boolean,
-  ) {
-    this.interval = Math.max(50, options.interval ?? 500);
-    this.inside = inside;
-  }
-}
+const playerCoords = (): [number, number, number] => {
+  const [x = 0, y = 0, z = 0] = GetEntityCoords(PlayerPedId(), false);
+  return [x, y, z];
+};
 
 /**
- * A set of zones. One scheduler job serves them all at the shortest interval any zone asks for; each zone is checked
- * only when its own interval has passed. With no zones the job stops.
+ * A set of zones. One scheduler job serves the script-checked ones at the shortest interval any of them asks for;
+ * each zone is checked only when its own interval has passed. With none of them the job stops.
  */
 export class ZoneEngine {
   private readonly zones = new Map<string, Zone>();
-  private readonly grid = new Map<number, Set<Zone>>();
-  private readonly large = new Set<Zone>();
+  private readonly grid = new ZoneGrid();
   private readonly insideNow = new Set<Zone>();
-  /** How many zones use each interval, so the shortest one is found without walking every zone. */
-  private readonly intervals = new Map<number, number>();
   private job: Job | null = null;
   private period = 0;
+  /** Colshapes passed the live test. */
+  private native = false;
+
+  constructor(options: ZoneEngineOptions = {}) {
+    if (options.colshapes) void this.startColshapes();
+  }
 
   /**
    * Adds (or replaces) a zone. A replaced zone the player was in fires its onExit first. `inside` seeds the state of a
@@ -65,28 +54,13 @@ export class ZoneEngine {
     const zone = new Zone(options, inside);
     this.zones.set(id, zone);
     if (inside) this.insideNow.add(zone);
-    const [minX, minY, maxX, maxY] = zoneBounds(options.shape);
-    const x0 = Math.floor(minX / CELL);
-    const y0 = Math.floor(minY / CELL);
-    const x1 = Math.floor(maxX / CELL);
-    const y1 = Math.floor(maxY / CELL);
-    if ((x1 - x0 + 1) * (y1 - y0 + 1) > MAX_CELLS) this.large.add(zone);
-    else {
-      for (let cx = x0; cx <= x1; cx++) {
-        for (let cy = y0; cy <= y1; cy++) {
-          const key = cellKey(cx, cy);
-          let cell = this.grid.get(key);
-          if (!cell) this.grid.set(key, (cell = new Set()));
-          cell.add(zone);
-          zone.cells.push(key);
-        }
-      }
+    if (!this.attach(zone)) {
+      this.grid.file(zone);
+      return this.schedule();
     }
-    this.intervals.set(
-      zone.interval,
-      (this.intervals.get(zone.interval) ?? 0) + 1,
-    );
-    this.schedule();
+    // A colshape only reports changes it saw itself: a seeded zone the player already left must exit here.
+    if (inside && !zoneContains(options.shape, ...playerCoords()))
+      this.setInside(zone, false);
   }
 
   /** Removes a zone; it fires onExit when the player was in it, unless `quiet` (a hand-over). */
@@ -94,27 +68,18 @@ export class ZoneEngine {
     const zone = this.zones.get(id);
     if (!zone) return;
     this.zones.delete(id);
-    this.large.delete(zone);
-    for (const key of zone.cells) {
-      const cell = this.grid.get(key);
-      cell?.delete(zone);
-      if (cell?.size === 0) this.grid.delete(key);
-    }
-    const left = (this.intervals.get(zone.interval) ?? 1) - 1;
-    if (left > 0) this.intervals.set(zone.interval, left);
-    else this.intervals.delete(zone.interval);
+    this.detach(zone);
+    if (this.grid.unfile(zone)) this.schedule();
     if (this.insideNow.delete(zone) && !quiet) this.fire(zone, false);
-    this.schedule();
   }
 
   /** Removes every zone (exits fire for the ones the player is in). */
   clear(): void {
     const inside = [...this.insideNow];
+    for (const zone of this.zones.values()) this.detach(zone);
     this.zones.clear();
     this.grid.clear();
-    this.large.clear();
     this.insideNow.clear();
-    this.intervals.clear();
     for (const zone of inside) this.fire(zone, false);
     this.schedule();
   }
@@ -127,10 +92,48 @@ export class ZoneEngine {
     return this.zones.size;
   }
 
+  private async startColshapes(): Promise<void> {
+    if (!(await colshapesWork())) {
+      log.info("zones: colshapes unavailable, script check kept");
+      return;
+    }
+    this.native = true;
+    for (const zone of this.zones.values())
+      if (zone.filed && this.attach(zone)) this.grid.unfile(zone);
+    this.schedule();
+    // A new ped (model swap, character switch) is a new entity: the old one's exit is ignored, so check once.
+    onCache("ped", () => setTimeout(() => this.recheckColshapes(), 1000));
+  }
+
+  /** The zone as a colshape that reports the player's own ped; false when it stays on the script check. */
+  private attach(zone: Zone): boolean {
+    if (!this.native) return false;
+    const id = createColshape(zone.options.shape);
+    if (id === null) return false;
+    zone.colshape = id;
+    zone.unsubscribe = onColshape(id, (entity, inside) => {
+      if (entity === PlayerPedId()) this.setInside(zone, inside);
+    });
+    return true;
+  }
+
+  private detach(zone: Zone): void {
+    if (zone.colshape === null) return;
+    zone.unsubscribe?.();
+    deleteColshape(zone.colshape);
+    zone.colshape = null;
+    zone.unsubscribe = null;
+  }
+
+  private recheckColshapes(): void {
+    const [x, y, z] = playerCoords();
+    for (const zone of this.zones.values())
+      if (zone.colshape !== null)
+        this.setInside(zone, zoneContains(zone.options.shape, x, y, z));
+  }
+
   private schedule(): void {
-    let period = 0;
-    for (const interval of this.intervals.keys())
-      period = period === 0 ? interval : Math.min(period, interval);
+    const period = this.grid.shortestInterval();
     if (period === this.period) return;
     this.job?.stop();
     this.job = period
@@ -143,18 +146,18 @@ export class ZoneEngine {
     const now = GetGameTimer();
     const [x = 0, y = 0, z = 0] = GetEntityCoords(cache.ped, false);
     // The zones the player is in go first, so leaving one is noticed wherever the player went.
-    for (const zone of this.insideNow) this.test(zone, now, x, y, z);
-    for (const zone of this.large) this.test(zone, now, x, y, z);
-    const cell = this.grid.get(
-      cellKey(Math.floor(x / CELL), Math.floor(y / CELL)),
-    );
-    if (cell) for (const zone of cell) this.test(zone, now, x, y, z);
+    for (const zone of this.insideNow)
+      if (zone.filed) this.test(zone, now, x, y, z);
+    this.grid.forNear(x, y, (zone) => this.test(zone, now, x, y, z));
   }
 
   private test(zone: Zone, now: number, x: number, y: number, z: number): void {
     if (now < zone.nextCheck) return;
     zone.nextCheck = now + zone.interval;
-    const inside = zoneContains(zone.options.shape, x, y, z);
+    this.setInside(zone, zoneContains(zone.options.shape, x, y, z));
+  }
+
+  private setInside(zone: Zone, inside: boolean): void {
     if (inside === zone.inside) return;
     if (inside) this.insideNow.add(zone);
     else this.insideNow.delete(zone);
