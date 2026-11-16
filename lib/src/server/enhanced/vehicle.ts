@@ -22,6 +22,19 @@ const TANK_FLOOR = 100;
 let readFailed = false;
 
 /**
+ * A per-wheel native that may refuse an index. Tyre and wheel indexes are GTA's (0 LF, 1 RF, 2 LM, 3 RM, 4 LR, 5 RR,
+ * ...: a car's rear tyres are 4 and 5) or the synced wheel order; the docs do not say which, so every index up to
+ * `VEHICLE_DAMAGE_MAX.wheel` is walked and a refused one counts as intact.
+ */
+function wheelSafe(fn: () => unknown): boolean {
+  try {
+    return Boolean(fn());
+  } catch {
+    return false;
+  }
+}
+
+/**
  * The damage of a vehicle a client owns and has synced (windows, tyres, wheels, lights, bumpers, petrol tank), read on
  * the server. Null on Legacy, before the owner's first sync (the server's vehicle data is empty then) or when a native
  * fails (logged once): the caller keeps what it had.
@@ -34,18 +47,18 @@ export function readVehicleDamage(vehicle: number): VehicleDamage | null {
   )
     return null;
   try {
-    const wheels = wheelCount(vehicle);
-    if (wheels === 0) return null;
+    // 0 until the owner's first sync: nothing to read yet.
+    if (wheelCount(vehicle) === 0) return null;
     const windows: number[] = [];
     if (!bool(HASH.allWindows, vehicle))
       for (let i = 0; i <= VEHICLE_DAMAGE_MAX.window; i++)
         if (!IsVehicleWindowIntact(vehicle, i)) windows.push(i);
     const tyres: Array<[number, boolean]> = [];
     const wheelsOff: number[] = [];
-    for (let i = 0; i < wheels; i++) {
-      if (bool(HASH.wheelOff, vehicle, i)) wheelsOff.push(i);
-      else if (IsVehicleTyreBurst(vehicle, i, false))
-        tyres.push([i, Boolean(IsVehicleTyreBurst(vehicle, i, true))]);
+    for (let i = 0; i <= VEHICLE_DAMAGE_MAX.wheel; i++) {
+      if (wheelSafe(() => bool(HASH.wheelOff, vehicle, i))) wheelsOff.push(i);
+      else if (wheelSafe(() => IsVehicleTyreBurst(vehicle, i, false)))
+        tyres.push([i, wheelSafe(() => IsVehicleTyreBurst(vehicle, i, true))]);
     }
     const lights: number[] = [];
     for (let i = 0; i <= VEHICLE_DAMAGE_MAX.light; i++)
@@ -68,18 +81,6 @@ export function readVehicleDamage(vehicle: number): VehicleDamage | null {
     readFailed = true;
     return null;
   }
-}
-
-/** Damaged parts in it (each window, tyre, wheel, light and bumper, the tank once): 0 = nothing to repair. */
-export function countVehicleDamage(damage: VehicleDamage): number {
-  return (
-    damage.windows.length +
-    damage.tyres.length +
-    damage.wheelsOff.length +
-    damage.lights.length +
-    damage.bumpers.filter((s) => s > 0).length +
-    (damage.tank < 1000 ? 1 : 0)
-  );
 }
 
 /** Writes stored damage to the synced vehicle data; false on Legacy. */
@@ -157,10 +158,9 @@ export function repairVehicle(vehicle: number): boolean {
     call(HASH.tank, vehicle, float(1000)),
   );
   attempt("SET_VEHICLE_BODY_HEALTH", () => SetVehicleBodyHealth(vehicle, 1000));
-  attempt("SET_VEHICLE_TYRE_FIXED", () => {
-    for (let i = 0, n = wheelCount(vehicle); i < n; i++)
-      call(HASH.fixTyre, vehicle, i);
-  });
+  // Every index (see `wheelSafe`); SET_VEHICLE_FIXED repairs them on the owner client too.
+  for (let i = 0; i <= VEHICLE_DAMAGE_MAX.wheel; i++)
+    wheelSafe(() => call(HASH.fixTyre, vehicle, i));
   return true;
 }
 

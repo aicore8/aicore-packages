@@ -55,8 +55,9 @@ export function attempt(name: string, fn: () => void): void {
 
 let vehicleNatives: boolean | undefined;
 /**
- * The b177 server vehicle natives, probed once on an existing vehicle: a server without them throws on the unknown
- * hash (ai-voice's probe works the same way).
+ * The b177 server vehicle natives: a server without them throws on the unknown hash (ai-voice's probe works the same
+ * way). A "no" is kept only when probed on a vehicle a client owns, so a fresh entity without data cannot switch the
+ * feature off for good.
  */
 export function hasVehicleNatives(vehicle: number): boolean {
   if (vehicleNatives === undefined && DoesEntityExist(vehicle)) {
@@ -64,7 +65,7 @@ export function hasVehicleNatives(vehicle: number): boolean {
       bool(HASH.isWrecked, vehicle);
       vehicleNatives = true;
     } catch {
-      vehicleNatives = false;
+      if (NetworkGetEntityOwner(vehicle) > 0) vehicleNatives = false;
     }
   }
   return vehicleNatives === true;
