@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.3](https://github.com/aicore8/aicore-packages/compare/build-v0.2.2...build-v0.2.3) (2026-11-18)
+
+
+### Miscellaneous Chores
+
+* rename aifivem to aicore8 (aicore8.com, github.com/aicore8, [@aicore8](https://github.com/aicore8) npm scope) ([4a8b17b](https://github.com/aicore8/aicore-packages/commit/4a8b17b2368a42ad9b9f1df85ca7dc2fa91dbec2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @aicore8/shared bumped from ^0.8.0 to ^0.8.1
+
 ## [0.2.2](https://github.com/aicore8/aicore-packages/compare/build-v0.2.1...build-v0.2.2) (2026-11-16)
 
 

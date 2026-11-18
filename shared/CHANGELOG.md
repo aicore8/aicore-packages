@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/aicore8/aicore-packages/compare/shared-v0.8.0...shared-v0.8.1) (2026-11-18)
+
+
+### Miscellaneous Chores
+
+* rename aifivem to aicore8 (aicore8.com, github.com/aicore8, [@aicore8](https://github.com/aicore8) npm scope) ([4a8b17b](https://github.com/aicore8/aicore-packages/commit/4a8b17b2368a42ad9b9f1df85ca7dc2fa91dbec2))
+
 ## [0.8.0](https://github.com/aicore8/aicore-packages/compare/shared-v0.7.0...shared-v0.8.0) (2026-11-16)
 
 

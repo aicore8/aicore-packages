@@ -1,6 +1,6 @@
 {
   "name": "@aicore8/mysql",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "ai-core's MySQL/MariaDB engine: an in-process pool per resource with oxmysql-compatible behaviour.",
   "license": "GPL-3.0-only",
   "repository": {
