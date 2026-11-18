@@ -4,7 +4,7 @@ import {
   type HeldWeapon,
   type InventoryStack,
   type ItemDefinition,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 import { resourceExport } from "../fivem/exports";
 import { isRecord } from "../shared";
 

@@ -1,4 +1,4 @@
-import { CORE } from "@aifivem/shared";
+import { CORE } from "@aicore8/shared";
 import { isResourceStarted } from "../../fivem/exports";
 import { GlobalKey } from "../../fivem/state/globalState";
 import { stateString } from "../../fivem/state/mirror";

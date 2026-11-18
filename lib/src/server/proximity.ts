@@ -1,4 +1,4 @@
-import { CORE } from "@aifivem/shared";
+import { CORE } from "@aicore8/shared";
 import { resourceExport } from "../fivem/exports";
 import type { Vec3 } from "../shared/vec";
 import { online } from "./online/online";

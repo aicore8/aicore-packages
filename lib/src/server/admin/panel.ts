@@ -6,7 +6,7 @@ import {
   type AdminResult,
   type FileSpec,
   type PanelSchema,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 import { isRecord, previewJson } from "../../shared";
 import { registerExport, resourceExport } from "../../fivem/exports";
 import { loadLocaleTexts } from "../../fivem/locale";

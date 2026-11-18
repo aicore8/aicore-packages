@@ -1,11 +1,11 @@
 {
-  "name": "@aifivem/mysql",
+  "name": "@aicore8/mysql",
   "version": "0.2.0",
   "description": "ai-core's MySQL/MariaDB engine: an in-process pool per resource with oxmysql-compatible behaviour.",
   "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aifivem/aicore-packages.git",
+    "url": "git+https://github.com/aicore8/aicore-packages.git",
     "directory": "mysql"
   },
   "type": "module",

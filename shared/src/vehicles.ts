@@ -16,7 +16,7 @@ export interface OwnedVehicle {
   plate: string;
   owner: VehicleOwner;
   model: string;
-  /** VehicleProps (`@aifivem/lib/shared`) or null before the first save. */
+  /** VehicleProps (`@aicore8/lib/shared`) or null before the first save. */
   props: unknown;
   /** VehicleSetup (lib `spawnVehicle`'s `setup`) the vehicle spawns with while it has no props (a shop's colour). */
   setup: unknown;
@@ -25,7 +25,7 @@ export interface OwnedVehicle {
   fuel: number;
   engine: number;
   body: number;
-  /** VehicleDamage (`@aifivem/lib/shared`: windows, tyres, lights, bumpers, tank) read by the server on Enhanced; null when none is stored. */
+  /** VehicleDamage (`@aicore8/lib/shared`: windows, tyres, lights, bumpers, tank) read by the server on Enhanced; null when none is stored. */
   damage?: unknown;
 }
 

@@ -1,4 +1,4 @@
-import type { PanelSchema, WidgetSpec } from "@aifivem/shared";
+import type { PanelSchema, WidgetSpec } from "@aicore8/shared";
 import { isRecord } from "../../shared";
 
 /** Path inside a file (`branding.name`, list items as `rows[].x`) -> "Label: hint". */

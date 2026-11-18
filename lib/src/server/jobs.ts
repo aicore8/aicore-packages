@@ -2,7 +2,7 @@ import {
   CORE,
   type GangMembership,
   type JobMembership,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 import { resourceExport } from "../fivem/exports";
 
 const core = resourceExport(CORE.resource);

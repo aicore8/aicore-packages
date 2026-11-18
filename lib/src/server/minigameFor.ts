@@ -3,7 +3,7 @@ import {
   LOCKPICK_AREAS,
   SKILL_STAGES,
   type MinigameRequest,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 import { triggerClientCallback } from "./callback";
 
 export type MinigameOutcome = "won" | "lost" | "broken";

@@ -1,6 +1,6 @@
-/** Server-only helpers. Import from "@aifivem/lib/server". */
+/** Server-only helpers. Import from "@aicore8/lib/server". */
 
-import type { AiPlayerData } from "@aifivem/shared";
+import type { AiPlayerData } from "@aicore8/shared";
 import {
   PLAYER_DATA_EVENT,
   PLAYER_DATA_PATCH_EVENT,

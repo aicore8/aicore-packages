@@ -1,4 +1,4 @@
-import { CORE, type KeyPurpose } from "@aifivem/shared";
+import { CORE, type KeyPurpose } from "@aicore8/shared";
 import { resourceExport } from "../fivem/exports";
 
 const core = resourceExport(CORE.resource);

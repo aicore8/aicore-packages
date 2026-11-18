@@ -1,4 +1,4 @@
-import { LIB_UI } from "@aifivem/shared";
+import { LIB_UI } from "@aicore8/shared";
 import { callExport, isResourceStarted } from "../fivem/exports";
 import { createLogger } from "../shared";
 import type { ZoneShape } from "../shared/zone";

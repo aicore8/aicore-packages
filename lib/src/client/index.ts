@@ -1,4 +1,4 @@
-/** Client-only helpers. Import from "@aifivem/lib/client". */
+/** Client-only helpers. Import from "@aicore8/lib/client". */
 
 export { TickLoop } from "./tickLoop";
 export { AreaFollower } from "./areaFollower";

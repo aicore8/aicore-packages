@@ -1,7 +1,7 @@
-# Releases come from Conventional Commits on main (feat:, fix:, perf:...): see aifivem/.github.
+# Releases come from Conventional Commits on main (feat:, fix:, perf:...): see aicore8/.github.
 # A merged release pull request publishes each released package to npm through trusted publishing (OIDC, no token;
 # provenance is automatic). npm checks this file's name: every package's trusted publisher on npmjs.com is
-# aifivem/aicore-packages + release.yml.
+# aicore8/aicore-packages + release.yml.
 name: release
 
 on:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   release:
-    uses: aifivem/.github/.github/workflows/release.yml@main
+    uses: aicore8/.github/.github/workflows/release.yml@main
     secrets: inherit
 
   npm:

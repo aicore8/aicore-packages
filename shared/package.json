@@ -1,11 +1,11 @@
 {
-  "name": "@aifivem/shared",
+  "name": "@aicore8/shared",
   "version": "0.8.0",
   "description": "Contracts shared between ai-core resources: event names, payload types, export types.",
   "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aifivem/aicore-packages.git",
+    "url": "git+https://github.com/aicore8/aicore-packages.git",
     "directory": "shared"
   },
   "type": "module",

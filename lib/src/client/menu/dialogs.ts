@@ -3,7 +3,7 @@ import type {
   ItemPickerRequest,
   MenuRequest,
   PickedItem,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 import { core, requests, ui, type MenuListeners } from "./requests";
 
 /**

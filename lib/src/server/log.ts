@@ -1,4 +1,4 @@
-import type { LogChannel, LogOptions } from "@aifivem/shared";
+import type { LogChannel, LogOptions } from "@aicore8/shared";
 import { optionalExport } from "../fivem/exports";
 
 /**

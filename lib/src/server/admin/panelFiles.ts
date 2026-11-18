@@ -3,7 +3,7 @@ import {
   CORE,
   type FileSpec,
   type PanelSchema,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 import { createLogger, isRecord, type Logger } from "../../shared";
 import { FileViews, type RecordReader } from "../../shared/records";
 import { resourceExport } from "../../fivem/exports";

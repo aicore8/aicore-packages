@@ -4,7 +4,7 @@ import {
   type LockpickResult,
   type SkillDifficulty,
   type SkillStage,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 import { requests, ui } from "./requests";
 
 const stageOf = (d: SkillDifficulty): SkillStage =>

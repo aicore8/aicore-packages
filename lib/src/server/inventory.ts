@@ -7,7 +7,7 @@ import {
   type ItemMetadata,
   type ShopProduct,
   type UsableItemHandler,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 import { resourceExport } from "../fivem/exports";
 
 const core = resourceExport(CORE.resource);

@@ -1,4 +1,4 @@
-import { CORE, type DispatchAlert } from "@aifivem/shared";
+import { CORE, type DispatchAlert } from "@aicore8/shared";
 import { resourceExport } from "../fivem/exports";
 
 const core = resourceExport(CORE.resource);

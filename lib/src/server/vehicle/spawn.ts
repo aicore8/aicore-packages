@@ -1,4 +1,4 @@
-import { VEHICLE_BAGS, type KeyPurpose } from "@aifivem/shared";
+import { VEHICLE_BAGS, type KeyPurpose } from "@aicore8/shared";
 import {
   waitFor,
   type VehicleDamage,

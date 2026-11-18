@@ -1,4 +1,4 @@
-import { CORE } from "@aifivem/shared";
+import { CORE } from "@aicore8/shared";
 import { optionalExport } from "../fivem/exports";
 import { cache } from "./cache";
 

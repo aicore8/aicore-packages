@@ -1,4 +1,4 @@
-import { CORE, type RadialItem } from "@aifivem/shared";
+import { CORE, type RadialItem } from "@aicore8/shared";
 import { resourceExport } from "../fivem/exports";
 
 const core = resourceExport(CORE.resource);

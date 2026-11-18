@@ -2,7 +2,7 @@ import {
   LIB_UI,
   type Notification,
   type NotificationKind,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 
 /** Shows a notification card on one player's screen (ai-lib draws it, `title` above the text); texts are already translated. */
 export function notify(

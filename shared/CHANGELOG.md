@@ -1,103 +1,103 @@
 # Changelog
 
-## [0.8.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.7.0...shared-v0.8.0) (2026-11-16)
+## [0.8.0](https://github.com/aicore8/aicore-packages/compare/shared-v0.7.0...shared-v0.8.0) (2026-11-16)
 
 
 ### New Features
 
-* **lib:** Enhanced server helpers (colshapes, vehicle damage read/restore, server repair), vehicleCondition, spawnVehicle damage ([4d91cbe](https://github.com/aifivem/aicore-packages/commit/4d91cbeedd9f53d9c1bb07746a5b21f5e343b598))
+* **lib:** Enhanced server helpers (colshapes, vehicle damage read/restore, server repair), vehicleCondition, spawnVehicle damage ([4d91cbe](https://github.com/aicore8/aicore-packages/commit/4d91cbeedd9f53d9c1bb07746a5b21f5e343b598))
 
-## [0.7.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.6.0...shared-v0.7.0) (2026-11-02)
+## [0.7.0](https://github.com/aicore8/aicore-packages/compare/shared-v0.6.0...shared-v0.7.0) (2026-11-02)
 
 
 ### New Features
 
-* **lib:** add illegal status, characters.idOf and paycheck and export types ([0f34765](https://github.com/aifivem/aicore-packages/commit/0f34765109482eed892fa94b34d5066c5a567f0b))
-* **lib:** add mdt.hasWarrant for the active MDT's warrant check ([16b3fda](https://github.com/aifivem/aicore-packages/commit/16b3fdaa3775e97a1bb83a6a56c3ca9cae7e03d7))
-* **lib:** add needs.set and type ai-hud's stress relief export ([531c402](https://github.com/aifivem/aicore-packages/commit/531c40292fcdde8a0097017a40dfdcabd7d9b337))
-* **lib:** add phone.onUsed on both sides ([2ce688a](https://github.com/aifivem/aicore-packages/commit/2ce688a9e16211de6253a1200f5e87995ba85737))
-* **lib:** add warrants for ai-core's own wanted system ([7b72635](https://github.com/aifivem/aicore-packages/commit/7b726359000c0e892e1a07fab80fbbf737afcbb7))
-* **shared:** phone client adapters always watch an event or state bag ([008c1a8](https://github.com/aifivem/aicore-packages/commit/008c1a840abcb33e9b697b4e2ab74a0642310b81))
-* **shared:** type ai-vehicles' AdoptVehicle export ([a14693a](https://github.com/aifivem/aicore-packages/commit/a14693ac66d11a013501556a1cf0a7ca4718df50))
+* **lib:** add illegal status, characters.idOf and paycheck and export types ([0f34765](https://github.com/aicore8/aicore-packages/commit/0f34765109482eed892fa94b34d5066c5a567f0b))
+* **lib:** add mdt.hasWarrant for the active MDT's warrant check ([16b3fda](https://github.com/aicore8/aicore-packages/commit/16b3fdaa3775e97a1bb83a6a56c3ca9cae7e03d7))
+* **lib:** add needs.set and type ai-hud's stress relief export ([531c402](https://github.com/aicore8/aicore-packages/commit/531c40292fcdde8a0097017a40dfdcabd7d9b337))
+* **lib:** add phone.onUsed on both sides ([2ce688a](https://github.com/aicore8/aicore-packages/commit/2ce688a9e16211de6253a1200f5e87995ba85737))
+* **lib:** add warrants for ai-core's own wanted system ([7b72635](https://github.com/aicore8/aicore-packages/commit/7b726359000c0e892e1a07fab80fbbf737afcbb7))
+* **shared:** phone client adapters always watch an event or state bag ([008c1a8](https://github.com/aicore8/aicore-packages/commit/008c1a840abcb33e9b697b4e2ab74a0642310b81))
+* **shared:** type ai-vehicles' AdoptVehicle export ([a14693a](https://github.com/aicore8/aicore-packages/commit/a14693ac66d11a013501556a1cf0a7ca4718df50))
 
 
 ### Code Refactoring
 
-* **shared:** move ban export types into their own file ([48f71b6](https://github.com/aifivem/aicore-packages/commit/48f71b640f8d29e9184467cd77580bd148e77627))
+* **shared:** move ban export types into their own file ([48f71b6](https://github.com/aicore8/aicore-packages/commit/48f71b640f8d29e9184467cd77580bd148e77627))
 
 
 ### Documentation
 
-* **shared:** the phone opened event carries no arguments ([a5989cb](https://github.com/aifivem/aicore-packages/commit/a5989cb43cca167bcc84a62a4e02deab07ebe7cb))
-* **shared:** the phone opened event carries the phone's name ([f9c53f2](https://github.com/aifivem/aicore-packages/commit/f9c53f2adf1f210be0952bd44785801ccbb5247d))
+* **shared:** the phone opened event carries no arguments ([a5989cb](https://github.com/aicore8/aicore-packages/commit/a5989cb43cca167bcc84a62a4e02deab07ebe7cb))
+* **shared:** the phone opened event carries the phone's name ([f9c53f2](https://github.com/aicore8/aicore-packages/commit/f9c53f2adf1f210be0952bd44785801ccbb5247d))
 
-## [0.6.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.5.0...shared-v0.6.0) (2026-11-02)
+## [0.6.0](https://github.com/aicore8/aicore-packages/compare/shared-v0.5.0...shared-v0.6.0) (2026-11-02)
 
 
 ### ⚠ BREAKING CHANGES
 
-* @aicore-fivem/build, lib, mysql and shared are now @aifivem/build, lib, mysql and shared; change the imports and package.json dependencies.
+* @aicore-fivem/build, lib, mysql and shared are now @aicore8/build, lib, mysql and shared; change the imports and package.json dependencies.
 
 ### Code Refactoring
 
-* publish the packages under the [@aifivem](https://github.com/aifivem) npm scope ([b061db9](https://github.com/aifivem/aicore-packages/commit/b061db9a1bc2cffe2ba915d2c99e9592dd11df3e))
+* publish the packages under the [@aicore8](https://github.com/aicore8) npm scope ([b061db9](https://github.com/aicore8/aicore-packages/commit/b061db9a1bc2cffe2ba915d2c99e9592dd11df3e))
 
-## [0.5.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.4.0...shared-v0.5.0) (2026-11-01)
-
-
-### New Features
-
-* **inventory:** client item list and item count events in the inventory contract and lib ([31eb748](https://github.com/aifivem/aicore-packages/commit/31eb74875fa323896ae9594abf35ca2bccf86649))
-* **lib:** character search, ledger history, money and jobs helpers ([6400abc](https://github.com/aifivem/aicore-packages/commit/6400abcc2a66f1a843938fb3c8b809cc831e5f25))
-* **lib:** inventory.canCarryItems, jobs.unemployed and characters.hasJobMember ([f75f1e8](https://github.com/aifivem/aicore-packages/commit/f75f1e8bf1f8e2a0f39b2c0fa27c59b0f67874be))
-* **lib:** needs.add ([5c809f5](https://github.com/aifivem/aicore-packages/commit/5c809f59008c4d722f69bc39f7db891288b0c3e2))
-* **vehicles:** FindVehicle, GetVehiclesOf and SetPlate contracts ([deb62f4](https://github.com/aifivem/aicore-packages/commit/deb62f4a50ef1cc8fd6245b53a15c804be634404))
-* **vehicles:** framework shaped props in the vehicle reads ([94e2da1](https://github.com/aifivem/aicore-packages/commit/94e2da1c5942e6be94b3eda656308fa82c059291))
-
-## [0.4.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.3.0...shared-v0.4.0) (2026-11-01)
+## [0.5.0](https://github.com/aicore8/aicore-packages/compare/shared-v0.4.0...shared-v0.5.0) (2026-11-01)
 
 
 ### New Features
 
-* **lib:** ban history, search and edits; open the admin panel on a section ([4db9b2d](https://github.com/aifivem/aicore-packages/commit/4db9b2daa00004eaeafe37de8da99767f5f3dea0))
-* **shared:** contracts for offline characters, bans, script job definitions, external character screens, item metadata and client key checks ([d5065d5](https://github.com/aifivem/aicore-packages/commit/d5065d524a077e5e47d23bef7cf03d946d16f75b))
-* **shared:** DeathInfo, the details of a player's death ([c98ed32](https://github.com/aifivem/aicore-packages/commit/c98ed325bce6946db03efb024fe965446a9a435c))
+* **inventory:** client item list and item count events in the inventory contract and lib ([31eb748](https://github.com/aicore8/aicore-packages/commit/31eb74875fa323896ae9594abf35ca2bccf86649))
+* **lib:** character search, ledger history, money and jobs helpers ([6400abc](https://github.com/aicore8/aicore-packages/commit/6400abcc2a66f1a843938fb3c8b809cc831e5f25))
+* **lib:** inventory.canCarryItems, jobs.unemployed and characters.hasJobMember ([f75f1e8](https://github.com/aicore8/aicore-packages/commit/f75f1e8bf1f8e2a0f39b2c0fa27c59b0f67874be))
+* **lib:** needs.add ([5c809f5](https://github.com/aicore8/aicore-packages/commit/5c809f59008c4d722f69bc39f7db891288b0c3e2))
+* **vehicles:** FindVehicle, GetVehiclesOf and SetPlate contracts ([deb62f4](https://github.com/aicore8/aicore-packages/commit/deb62f4a50ef1cc8fd6245b53a15c804be634404))
+* **vehicles:** framework shaped props in the vehicle reads ([94e2da1](https://github.com/aicore8/aicore-packages/commit/94e2da1c5942e6be94b3eda656308fa82c059291))
+
+## [0.4.0](https://github.com/aicore8/aicore-packages/compare/shared-v0.3.0...shared-v0.4.0) (2026-11-01)
+
+
+### New Features
+
+* **lib:** ban history, search and edits; open the admin panel on a section ([4db9b2d](https://github.com/aicore8/aicore-packages/commit/4db9b2daa00004eaeafe37de8da99767f5f3dea0))
+* **shared:** contracts for offline characters, bans, script job definitions, external character screens, item metadata and client key checks ([d5065d5](https://github.com/aicore8/aicore-packages/commit/d5065d524a077e5e47d23bef7cf03d946d16f75b))
+* **shared:** DeathInfo, the details of a player's death ([c98ed32](https://github.com/aicore8/aicore-packages/commit/c98ed325bce6946db03efb024fe965446a9a435c))
 
 
 ### Code Refactoring
 
-* split the packages into concept files and folders; public API unchanged ([c80a9ee](https://github.com/aifivem/aicore-packages/commit/c80a9ee8464711295d2703039e024c0b227398e2))
+* split the packages into concept files and folders; public API unchanged ([c80a9ee](https://github.com/aicore8/aicore-packages/commit/c80a9ee8464711295d2703039e024c0b227398e2))
 
-## [0.3.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.2.0...shared-v0.3.0) (2026-10-31)
+## [0.3.0](https://github.com/aicore8/aicore-packages/compare/shared-v0.2.0...shared-v0.3.0) (2026-10-31)
 
 
 ### New Features
 
-* **lib:** needs.refill fills hunger and thirst through ai-core's HUD layer ([6584552](https://github.com/aifivem/aicore-packages/commit/6584552a7b2e0556a359e696552d9c1f4a0f575e))
-* **player:** spawn point carries the saved health ([e088760](https://github.com/aifivem/aicore-packages/commit/e08876004b2d7c9e34ebf16026582d9833aae00d))
-* **vrp:** vRP bridge contracts, player spawned event, inventory weight export, panel grade and browse widgets ([bdae4fe](https://github.com/aifivem/aicore-packages/commit/bdae4fe680e93850d9f746eb44433473adacfaa2))
+* **lib:** needs.refill fills hunger and thirst through ai-core's HUD layer ([6584552](https://github.com/aicore8/aicore-packages/commit/6584552a7b2e0556a359e696552d9c1f4a0f575e))
+* **player:** spawn point carries the saved health ([e088760](https://github.com/aicore8/aicore-packages/commit/e08876004b2d7c9e34ebf16026582d9833aae00d))
+* **vrp:** vRP bridge contracts, player spawned event, inventory weight export, panel grade and browse widgets ([bdae4fe](https://github.com/aicore8/aicore-packages/commit/bdae4fe680e93850d9f746eb44433473adacfaa2))
 
 
 ### Bug Fixes
 
-* **inventory:** adapter version is optional (none for ai-inventory) ([b0f02e5](https://github.com/aifivem/aicore-packages/commit/b0f02e5e5f51d48a1dffe592ec2fcfc0d9a8dba3))
+* **inventory:** adapter version is optional (none for ai-inventory) ([b0f02e5](https://github.com/aicore8/aicore-packages/commit/b0f02e5e5f51d48a1dffe592ec2fcfc0d9a8dba3))
 
-## [0.2.0](https://github.com/aifivem/aicore-packages/compare/shared-v0.1.0...shared-v0.2.0) (2026-10-31)
+## [0.2.0](https://github.com/aicore8/aicore-packages/compare/shared-v0.1.0...shared-v0.2.0) (2026-10-31)
 
 
 ### New Features
 
-* **banking:** banking adapter accounts contract for linked job and gang money ([a98edae](https://github.com/aifivem/aicore-packages/commit/a98edaefbee02a94a24690c4544685497224054a))
-* **billing:** bill contract for database-backed bills ([7bc582b](https://github.com/aifivem/aicore-packages/commit/7bc582b2788783ea6e534830dd190d4d4f59bcbe))
-* **lib:** fuel, doors, garages, billing, banking, MDT, EMS, seat belt, stress, emote and clothing menu wrappers; target adapters; model points hosted by ai-lib ([fc4a13a](https://github.com/aifivem/aicore-packages/commit/fc4a13a50b30d31c92dda6162549fbe8a8f776b3))
+* **banking:** banking adapter accounts contract for linked job and gang money ([a98edae](https://github.com/aicore8/aicore-packages/commit/a98edaefbee02a94a24690c4544685497224054a))
+* **billing:** bill contract for database-backed bills ([7bc582b](https://github.com/aicore8/aicore-packages/commit/7bc582b2788783ea6e534830dd190d4d4f59bcbe))
+* **lib:** fuel, doors, garages, billing, banking, MDT, EMS, seat belt, stress, emote and clothing menu wrappers; target adapters; model points hosted by ai-lib ([fc4a13a](https://github.com/aicore8/aicore-packages/commit/fc4a13a50b30d31c92dda6162549fbe8a8f776b3))
 
 
 ### Bug Fixes
 
-* **lib:** teleports find the lowest ground outside interiors; NUI layers ([e6581bf](https://github.com/aifivem/aicore-packages/commit/e6581bf3611eff08427add5a839d5787b1b18bce))
-* **lib:** world prompts follow entity spots; detect the target by ox_target or ai-target ([c434a69](https://github.com/aifivem/aicore-packages/commit/c434a69e24c8e447fab3d7f65f6c15fb8bb11447))
+* **lib:** teleports find the lowest ground outside interiors; NUI layers ([e6581bf](https://github.com/aicore8/aicore-packages/commit/e6581bf3611eff08427add5a839d5787b1b18bce))
+* **lib:** world prompts follow entity spots; detect the target by ox_target or ai-target ([c434a69](https://github.com/aicore8/aicore-packages/commit/c434a69e24c8e447fab3d7f65f6c15fb8bb11447))
 
 
 ### Performance
 
-* **lib:** ai-lib checks every resource's zones, so idle resources hold no timer ([960b1a2](https://github.com/aifivem/aicore-packages/commit/960b1a2ce17165370b942dce2eb4d27721d827a6))
+* **lib:** ai-lib checks every resource's zones, so idle resources hold no timer ([960b1a2](https://github.com/aicore8/aicore-packages/commit/960b1a2ce17165370b942dce2eb4d27721d827a6))

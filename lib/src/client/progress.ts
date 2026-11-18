@@ -1,5 +1,5 @@
 import { medical } from "./medical";
-import { LIB_UI } from "@aifivem/shared";
+import { LIB_UI } from "@aicore8/shared";
 import { resourceExport } from "../fivem/exports";
 import { every } from "../fivem/scheduler/every";
 import { cache } from "./cache";

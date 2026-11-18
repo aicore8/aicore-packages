@@ -1,4 +1,4 @@
-import { CORE } from "@aifivem/shared";
+import { CORE } from "@aicore8/shared";
 
 /** The local player's phone through ai-core's client phone layer, whatever phone runs (`docs/compat/phone.md`). */
 export const phone = {

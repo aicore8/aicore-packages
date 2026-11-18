@@ -1,11 +1,11 @@
 {
-  "name": "@aifivem/lib",
+  "name": "@aicore8/lib",
   "version": "0.9.0",
   "description": "Helpers every ai-core resource uses: logging, exports, rate limits, database tables.",
   "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aifivem/aicore-packages.git",
+    "url": "git+https://github.com/aicore8/aicore-packages.git",
     "directory": "lib"
   },
   "type": "module",
@@ -22,8 +22,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@aifivem/shared": "^0.8.0",
-    "@aifivem/mysql": "^0.2.0"
+    "@aicore8/shared": "^0.8.0",
+    "@aicore8/mysql": "^0.2.0"
   },
   "devDependencies": {
     "@citizenfx/client": "latest",

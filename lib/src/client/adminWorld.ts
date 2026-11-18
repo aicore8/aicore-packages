@@ -1,4 +1,4 @@
-import { ADMIN } from "@aifivem/shared";
+import { ADMIN } from "@aicore8/shared";
 import { createLogger, isRecord, withoutSchemaKey } from "../shared";
 import { FileViews, type RecordReader } from "../shared/records";
 import { triggerServerCallback } from "./callback";

@@ -4,7 +4,7 @@ import {
   type CharacterResult,
   type GangDefinition,
   type JobDefinition,
-} from "@aifivem/shared";
+} from "@aicore8/shared";
 
 const core = resourceExport("ai-core");
 

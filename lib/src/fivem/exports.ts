@@ -1,7 +1,7 @@
 /**
  * FiveM exports without the bare `exports` identifier. A source file that mentions `exports` is treated as
  * CommonJS by the bundler and wrapped in its own `(exports) =>` scope, which hides the FiveM function.
- * Shared by "@aifivem/lib/client" and "@aifivem/lib/server".
+ * Shared by "@aicore8/lib/client" and "@aicore8/lib/server".
  */
 
 // oxlint-disable-next-line typescript/no-explicit-any -- export handlers take whatever their contract declares
@@ -24,7 +24,7 @@ export function registerExport(name: string, handler: ExportHandler): void {
   if (twin !== name && !named.has(twin)) globalThis.exports(twin, handler);
 }
 
-/** Typed access to another resource's exports (types come from CitizenExports in @aifivem/shared). */
+/** Typed access to another resource's exports (types come from CitizenExports in @aicore8/shared). */
 export function resourceExport<K extends keyof CitizenExports & string>(
   resource: K,
 ): CitizenExports[K] {
