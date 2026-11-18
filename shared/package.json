@@ -1,6 +1,6 @@
 {
   "name": "@aicore8/shared",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Contracts shared between ai-core resources: event names, payload types, export types.",
   "license": "GPL-3.0-only",
   "repository": {
